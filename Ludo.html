@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    let count_bl=0, count_re=0, count_ye=0, count_gr=0;
+    let array_b =[{x: 290,y: 55},{x: 290, y: 85},{x: 290, y: 115},{x: 290, y: 145},{x:290, y: 175},{x:325, y: 210},{x:355, y:210},{x:385, y:210},{x:415, y:210},{x:445, y: 210},{x:475, y:210},
+    {x:475, y:250},{x:475, y:290},{x:445, y:290},{x:415, y:290},{x:385, y:290},{x:355, y:290},{x:325, y:290},{x:290, y:325},{x:290, y:355},{x:290, y:385},{x:290, y:415},{x:290, y:445},{x:290, y:475},{x:250, y:475},
+    {x:210, y:475},{x:210, y:445},{x:210, y:415},{x:210, y:385},{x:210, y:355},{x:210, y:325},{x:175, y:290},{x:145, y:290},{x:115, y:290},{x:85, y:290},{x:55, y:290},{x:25, y:290},{x:25, y:250},{x:25, y:210},{x:55, y:210},
+    {x:85, y:210},{x:115, y:210},{x:145,y:210},{x:175,y:210},{x:210,y:175},{x:210, y:145},{x:210, y:115},{x:210, y:85},{x:210, y:55},{x:210, y:25},{x:250, y:25},{x:250, y:55},{x:250, y:85},{x:250, y:115},{x:250, y:145},{x:250, y:175}, {x:250, y:205}];
+    
+    let array_g = [{x:55, y:210},{x:85, y:210},{x:115, y:210},{x:145,y:210},{x:175,y:210},{x:210,y:175},{x:210, y:145},{x:210, y:115},{x:210, y:85},{x:210, y:55},{x:210, y:25},{x:250, y:25},{x:290, y:25},
+    {x: 290,y: 55},{x: 290, y: 85},{x: 290, y: 115},{x: 290, y: 145},{x:290, y: 175},{x:325, y: 210},{x:355, y:210},{x:385, y:210},{x:415, y:210},{x:445, y: 210},{x:475, y:210},
+    {x:475, y:250},{x:475, y:290},{x:445, y:290},{x:415, y:290},{x:385, y:290},{x:355, y:290},{x:325, y:290},{x:290, y:325},{x:290, y:355},{x:290, y:385},{x:290, y:415},{x:290, y:445},{x:290, y:475},{x:250, y:475},
+    {x:210, y:475},{x:210, y:445},{x:210, y:415},{x:210, y:385},{x:210, y:355},{x:210, y:325},{x:175, y:290},{x:145, y:290},{x:115, y:290},{x:85, y:290},{x:55, y:290},{x:25, y:290},{x:25, y:250},{x:55, y:250},{x:85, y:250},{x:115, y:250},{x:145, y:250},{x:175, y:250},{x:215, y:250}];
+    
+    let array_y = [{x:210, y:445},{x:210, y:415},{x:210, y:385},{x:210, y:355},{x:210, y:325},{x:175, y:290},{x:145, y:290},{x:115, y:290},{x:85, y:290},{x:55, y:290},{x:25, y:290},{x:25, y:250},{x:25, y:210},{x:55, y:210},
+    {x:85, y:210},{x:115, y:210},{x:145,y:210},{x:175,y:210},{x:210,y:175},{x:210, y:145},{x:210, y:115},{x:210, y:85},{x:210, y:55},{x:210, y:25},{x:250, y:25},{x:290, y:25},
+    {x: 290,y: 55},{x: 290, y: 85},{x: 290, y: 115},{x: 290, y: 145},{x:290, y: 175},{x:325, y: 210},{x:355, y:210},{x:385, y:210},{x:415, y:210},{x:445, y: 210},{x:475, y:210},
+    {x:475, y:250},{x:475, y:290},{x:445, y:290},{x:415, y:290},{x:385, y:290},{x:355, y:290},{x:325, y:290},{x:290, y:325},{x:290, y:355},{x:290, y:385},{x:290, y:415},{x:290, y:445},{x:290, y:475},{x:250, y:475},
+    {x:250, y:445},{x:250, y:415},{x:250, y: 385},{x:250, y:355},{x:250, y:325}, {x:250, y:285}];
+    
+    let array_r = [{x:445, y:290},{x:415, y:290},{x:385, y:290},{x:355, y:290},{x:325, y:290},{x:290, y:325},{x:290, y:355},{x:290, y:385},{x:290, y:415},{x:290, y:445},{x:290, y:475},{x:250, y:475},
+    {x:210, y:475},{x:210, y:445},{x:210, y:415},{x:210, y:385},{x:210, y:355},{x:210, y:325},{x:175, y:290},{x:145, y:290},{x:115, y:290},{x:85, y:290},{x:55, y:290},{x:25, y:290},{x:25, y:250},{x:25, y:210},{x:55, y:210},
+    {x:85, y:210},{x:115, y:210},{x:145,y:210},{x:175,y:210},{x:210,y:175},{x:210, y:145},{x:210, y:115},{x:210, y:85},{x:210, y:55},{x:210, y:25},{x:250, y:25},{x:290, y:25},{x: 290,y: 55},{x: 290, y: 85},{x: 290, y: 115},
+    {x: 290, y: 145},{x:290, y: 175},{x:325, y: 210},{x:355, y:210},{x:385, y:210},{x:415, y:210},{x:445, y: 210},{x:475, y:210},{x:475, y:250},{x:445, y:250},{x:415,y:250},{x:385, y:250},{x:355, y:250},{x:325, y:250},{x:285, y:250}];
+    
+    let ele= [[{x: 350,  y: 50},{x: 450, y: 50},{x: 350, y: 150},{x: 450, y: 150}],
+             [{x: 350,  y: 350},{x: 450, y: 350},{x: 350, y: 450},{x: 450, y: 450}],
+             [{x: 50,  y: 350},{x: 150, y: 350},{x: 50, y: 450},{x: 150, y: 450}],
+             [{x: 50,  y: 50},{x: 150, y: 50},{x: 50, y: 150},{x: 150, y: 150}]];
+
+    let ret=  [[{x: 350,  y: 50},{x: 450, y: 50},{x: 350, y: 150},{x: 450, y: 150}],
+             [{x: 350,  y: 350},{x: 450, y: 350},{x: 350, y: 450},{x: 450, y: 450}],
+             [{x: 50,  y: 350},{x: 150, y: 350},{x: 50, y: 450},{x: 150, y: 450}],
+             [{x: 50,  y: 50},{x: 150, y: 50},{x: 50, y: 150},{x: 150, y: 150}]];
+    
+    let sum= [[0, 0, 0, 0 ],[0, 0, 0, 0 ],[0, 0, 0, 0 ],[0, 0, 0, 0 ]]
+    
+    let j= 100;
+    let z=0;
+    let canvas;
+    let ctx;
+    function draw(){
+        canvas = document.getElementById("ludo");
+        ctx = canvas.getContext("2d");
+        for(let i=30; i<=180; i+=30){
+            ctx.beginPath();
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = "5";
+        ctx.moveTo(190, 10+i);
+        ctx.lineTo(310, 10+i);
+        ctx.stroke();
+        }
+        for(let i=30; i<=180; i+=30){
+            ctx.beginPath();
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = "5";
+        ctx.moveTo(10+i, 190);
+        ctx.lineTo(10+i, 310);
+        ctx.stroke();
+        }
+        for(let i=30; i<=180; i+=30){
+            ctx.beginPath();
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = "5";
+        ctx.moveTo(190, 310+i);
+        ctx.lineTo(310, 310+i);
+        ctx.stroke();
+        }
+        for(let i=30; i<=180; i+=30){
+            ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = "5";
+        ctx.moveTo(310+i, 190);
+        ctx.lineTo(310+i, 310);
+        ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = "10";
+        ctx.moveTo(230, 10);
+        ctx.lineTo(230, 190);
+        ctx.moveTo(270, 10);
+        ctx.lineTo(270, 190);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = "10";
+        ctx.moveTo(10, 230);
+        ctx.lineTo(190, 230);
+        ctx.moveTo(10, 270);
+        ctx.lineTo(190, 270);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = "10";
+        ctx.moveTo(230, 310);
+        ctx.lineTo(230, 490);
+        ctx.moveTo(270, 310);
+        ctx.lineTo(270, 490);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = "10";
+        ctx.moveTo(310, 230);
+        ctx.lineTo(490, 230);
+        ctx.moveTo(310, 270);
+        ctx.lineTo(490, 270);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = "10";
+        ctx.moveTo(190, 190);
+        ctx.lineTo(310, 310);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = "10";
+        ctx.moveTo(310, 190);
+        ctx.lineTo(190, 310);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = "10";
+        ctx.rect(190, 190, 120, 120);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = "10";
+        ctx.rect(190, 10, 120, 180);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = "10";
+        ctx.rect(190, 310, 120, 180);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = "10";
+        ctx.rect(10, 190, 180, 120);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = "10";
+        ctx.rect(310, 190, 180, 120);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = "10";
+        ctx.rect(10, 10, 180, 180);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = "10";
+        ctx.rect(310, 10, 180, 180);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = "10";
+        ctx.rect(10, 310, 180, 180);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = "10";
+        ctx.rect(310, 310, 180, 180);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = "3";
+        ctx.arc(350, 50, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350+100, 50, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350, 50+100, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350+100, 50+100, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = "3";
+        ctx.arc(50, 50, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50+100, 50, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50, 50+100, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50+100, 50+100, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = "3";
+        ctx.arc(50, 350, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50+100, 350, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50, 350+100, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50+100, 350+100, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = "3";
+        ctx.arc(350, 350, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350+100, 350, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350, 350+100, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350+100, 350+100, 20, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = "3";
+        ctx.arc(350, 50, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("0",345, 58);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350+100, 50, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("1",445, 58);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350, 50+100, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("2",345, 158);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350+100, 50+100, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("3",445, 158);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = "3";
+        ctx.arc(50, 50, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("0",45, 58);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50+100, 50, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("1",145, 58);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50, 50+100, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("2",45, 158);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50+100, 50+100, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("3",145, 158);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = "3";
+        ctx.arc(50, 350, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("0",45, 358);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50+100, 350, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("1",145, 358);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50, 350+100, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("2",45, 458);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(50+100, 350+100, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("3",145, 458);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = "3";
+        ctx.arc(350, 350, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("0",345, 358);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350+100, 350, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("1",445, 358);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350, 350+100, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("2",345, 458);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350+100, 350+100, 10, 0, 2*Math.PI);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("3",445, 458);
+        ctx.stroke();
+    }
+    function move_piece(){
+        let turn;
+        let string = "";
+        if(document.getElementById("turn").innerText=="PLAYER BLUE TURN"){
+            turn = 0;
+        }
+        else if(document.getElementById("turn").innerText=="PLAYER RED TURN"){
+            turn = 1;
+        }
+        else if(document.getElementById("turn").innerText=="PLAYER YELLOW TURN"){
+            turn = 2;
+        }
+        else{
+            turn = 3;
+        }
+        let old = turn;
+        console.log(turn);
+        let piece = Number(document.getElementById("piece").value);
+        let dice  = Number(document.getElementById("dice").value);
+        if(dice==6 || ele[turn][piece].x!=ret[turn][piece].x || ele[turn][piece].y!=ret[turn][piece].y){
+            if(dice==6 && ele[turn][piece].x==ret[turn][piece].x && ele[turn][piece].y==ret[turn][piece].y){
+                dice = 1;
+            }
+        ctx.beginPath();
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = "3";
+        ctx.arc(ele[turn][piece].x, ele[turn][piece].y, 11, 0, 2*Math.PI);
+        ctx.fillStyle= "white";
+        ctx.fill();
+        ctx.stroke();
+        for(let i=0; i<4; i++){
+           for(let j=0; j<4; j++){
+               if(i!=turn || j!=piece){
+                   if(ele[i][j].x==ele[turn][piece].x && ele[i][j].y==ele[turn][piece].y){
+                       console.log("Hello");
+                       switch(i){
+                           case 0: ctx.beginPath();
+                                   ctx.strokeStyle = "black";
+                                   ctx.lineWidth = "3";
+                                   ctx.arc(ele[i][j].x, ele[i][j].y, 10, 0, 2*Math.PI);
+                                   ctx.fillStyle= "blue";
+                                   ctx.fill();
+                                   ctx.stroke();
+                                   break;
+                           case 1: ctx.beginPath();
+                                   ctx.strokeStyle = "black";
+                                   ctx.lineWidth = "3";
+                                   ctx.arc(ele[i][j].x, ele[i][j].y, 10, 0, 2*Math.PI);
+                                   ctx.fillStyle= "red";
+                                   ctx.fill();
+                                   ctx.stroke();
+                                   break;
+                          case 2: ctx.beginPath();
+                                   ctx.strokeStyle = "black";
+                                   ctx.lineWidth = "3";
+                                   ctx.arc(ele[i][j].x, ele[i][j].y, 10, 0, 2*Math.PI);
+                                   ctx.fillStyle= "yellow";
+                                   ctx.fill();
+                                   ctx.stroke();
+                                   break;
+                          case 3: ctx.beginPath();
+                                   ctx.strokeStyle = "black";
+                                   ctx.lineWidth = "3";
+                                   ctx.arc(ele[i][j].x, ele[i][j].y, 10, 0, 2*Math.PI);
+                                   ctx.fillStyle= "green";
+                                   ctx.fill();
+                                   ctx.stroke();
+                                   break;
+                       }
+                       switch(j){
+                           case 0: ctx.beginPath();
+                                   ctx.font = "20px Arial";
+                                   ctx.fillStyle = "black";
+                                   ctx.fillText("0",ele[i][j].x-5, ele[i][j].y+8);
+                                   ctx.stroke();
+                                   break;
+                           case 1: ctx.beginPath();
+                                   ctx.font = "20px Arial";
+                                   ctx.fillStyle = "black";
+                                   ctx.fillText("1",ele[i][j].x-5, ele[i][j].y+8);
+                                   ctx.stroke();
+                                   break;
+                          case 2: ctx.beginPath();
+                                   ctx.font = "20px Arial";
+                                   ctx.fillStyle = "black";
+                                   ctx.fillText("2",ele[i][j].x-5, ele[i][j].y+8);
+                                   ctx.stroke();
+                                   break;
+                          case 3: ctx.beginPath();
+                                   ctx.font = "20px Arial";
+                                   ctx.fillStyle = "black";
+                                   ctx.fillText("3",ele[i][j].x-5, ele[i][j].y+8);
+                                   ctx.stroke();
+                                   break;
+                       }
+                   }
+               }
+           }
+        }
+        if(sum[turn][piece]+dice<=57){
+           sum[turn][piece] +=dice;
+           if(sum[turn][piece]==57){
+               switch(turn){
+                   case 0: count_bl++;
+                   break;
+                   case 1: count_re++;
+                   break;
+                   case 2: count_ye++;
+                   break;
+                   case 3: count_gr++;
+                   break;
+               }
+           }
+        }
+        let posx, posy, count_x=0, count_y=0;
+        for(let i=0; i<4; i++){
+            for(let j=0; j<4; j++){
+                if(i!=turn){
+                    switch(turn){
+                       case 0: if(ele[i][j].x == array_b[sum[turn][piece]-1].x && ele[i][j].y==array_b[sum[turn][piece]-1].y){
+                           count_x++;
+                           count_y++;
+                           posx = i;
+                           posy = j;
+                       }
+                       break;
+                       case 1: if(ele[i][j].x == array_r[sum[turn][piece]-1].x && ele[i][j].y==array_r[sum[turn][piece]-1].y){
+                           count_x++;
+                           count_y++;
+                           posx = i;
+                           posy = j;
+                       }
+                       break;
+                       case 2:if(ele[i][j].x == array_y[sum[turn][piece]-1].x && ele[i][j].y==array_y[sum[turn][piece]-1].y){
+                           count_x++;
+                           count_y++;
+                           posx = i;
+                           posy = j;
+                        }
+                        break;
+                       case 3:if(ele[i][j].x == array_g[sum[turn][piece]-1].x && ele[i][j].y==array_g[sum[turn][piece]-1].y){
+                           count_x++;
+                           count_y++;
+                           posx = i;
+                           posy = j;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        if(count_x==1 && count_y==1){
+            ele[posx][posy].x = ret[posx][posy].x;
+            ele[posx][posy].y = ret[posx][posy].y;
+            sum[posx][posy] = 0;
+            ctx.beginPath();
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = "3";
+            ctx.arc(ele[posx][posy].x, ele[posx][posy].y, 10, 0, 2*Math.PI);
+            switch(posx){
+                case 0:ctx.fillStyle = "blue";
+                break;
+                case 1:ctx.fillStyle = "red";
+                break;
+                case 2:ctx.fillStyle = "yellow";
+                break;
+                case 3:ctx.fillStyle = "green";
+                break;
+            }
+            ctx.fill();
+            switch(posy){
+                case 0: ctx.font = "20px Arial";
+                        ctx.fillStyle = "black";
+                        ctx.fillText("0",ele[posx][posy].x-5, ele[posx][posy].y+8);
+                        break;
+                case 1: ctx.font = "20px Arial";
+                        ctx.fillStyle = "black";
+                        ctx.fillText("1",ele[posx][posy].x-5, ele[posx][posy].y+8);
+                        break;
+                case 2: ctx.font = "20px Arial";
+                        ctx.fillStyle = "black";
+                        ctx.fillText("2",ele[posx][posy].x-5, ele[posx][posy].y+8);
+                        break;
+                case 3: ctx.font = "20px Arial";
+                        ctx.fillStyle = "black";
+                        ctx.fillText("3",ele[posx][posy].x-5, ele[posx][posy].y+8);
+                        break;
+            }
+            ctx.stroke();
+        }
+        switch(turn){
+            case 0: 
+            ele[turn][piece].x = array_b[sum[turn][piece]-1].x;
+            ele[turn][piece].y = array_b[sum[turn][piece]-1].y;
+            break;
+            case 1: 
+            ele[turn][piece].x = array_r[sum[turn][piece]-1].x;
+            ele[turn][piece].y = array_r[sum[turn][piece]-1].y;
+            break;
+            case 2: 
+            ele[turn][piece].x = array_y[sum[turn][piece]-1].x;
+            ele[turn][piece].y = array_y[sum[turn][piece]-1].y;
+            break;
+            case 3: 
+            ele[turn][piece].x = array_g[sum[turn][piece]-1].x;
+            ele[turn][piece].y = array_g[sum[turn][piece]-1].y;
+        }
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = "3";
+        ctx.arc(ele[turn][piece].x, ele[turn][piece].y, 10, 0, 2*Math.PI);
+        switch(turn){
+            case 0: turn = 1;
+            document.getElementById("turn").innerText="PLAYER RED TURN";
+            ctx.fillStyle= "blue";
+            break;
+            case 1: turn = 2;
+            document.getElementById("turn").innerText="PLAYER YELLOW TURN";
+            ctx.fillStyle= "red";
+            break;
+            case 2: turn = 3;
+            document.getElementById("turn").innerText="PLAYER GREEN TURN";
+            ctx.fillStyle= "yellow";
+            break;
+            case 3: turn = 0;
+            document.getElementById("turn").innerText="PLAYER BLUE TURN";
+            ctx.fillStyle= "green";
+        }
+        ctx.fill();
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText(string+piece, (ele[old][piece].x)-5, (ele[old][piece].y)+8);
+        ctx.stroke();
+        }
+        else{
+            switch(turn){
+            case 0: turn = 1;
+            document.getElementById("turn").innerText="PLAYER RED TURN";
+            break;
+            case 1: turn = 2;
+            document.getElementById("turn").innerText="PLAYER YELLOW TURN";
+            break;
+            case 2: turn = 3;
+            document.getElementById("turn").innerText="PLAYER GREEN TURN";
+            break;
+            case 3: turn = 0;
+            document.getElementById("turn").innerText="PLAYER BLUE TURN";
+        }
+        }
+        document.getElementById("dice").value = 0;
+        document.getElementById("piece").value = 0;
+        if(count_bl==4){
+          ctx.clearRect(0, 0, 500, 500);
+          ctx.font = "25px Arial";
+          ctx.fillStyle = "blue";
+          ctx.fillText("PLAYER BLUE IS THE WINNER",100, 250);
+        }
+        else if(count_re==4){
+          ctx.clearRect(0, 0, 500, 500);
+          ctx.font = "100px Arial";
+          ctx.fillStyle = "red";
+          ctx.fillText("PLAYER RED IS THE WINNER",100, 250);
+        }
+        else if(count_ye==4){
+          ctx.clearRect(0, 0, 500, 500);
+          ctx.font = "100px Arial";
+          ctx.fillStyle = "yellow";
+          ctx.fillText("PLAYER YELLOW IS THE WINNER",100, 250);
+        }
+        else if(count_gr==4){
+          ctx.clearRect(0, 0, 500, 500);
+          ctx.font = "100px Arial";
+          ctx.fillStyle = "green";
+          ctx.fillText("PLAYER GREEN IS THE WINNER",100, 250);
+        }
+    }
+    function gen_rand(){
+        document.getElementById("dice").value = Math.floor(Math.random()*6+1);
+    }
+    </script>
+    <style>
+    #ludo{
+        border: solid black 2px;
+    }
+    .left{
+        float: left;
+        padding: 20px;
+    }
+    .right{
+       float: left;
+       background-color: darkorange;
+       padding: 50px;
+       height: 550px;
+       width: 385px;
+    }
+    </style>
+</head>
+<body onload="draw()">
+    <div id="turn" style="Text-align: center; border: solid orange 3px">PLAYER BLUE TURN</div>
+    <div class="left">
+    <canvas style="margin-left: 410px" id="ludo" height ="500" width="500"></canvas>
+    </div>
+    <div class="right">
+    <input id="piece" type="number" placeholder="which piece"><br><br>
+    <input id="dice" type="number" placeholder="face value">
+    <input class="btn btn-danger" type="submit" value="Rotate Dice" onclick="gen_rand()"><br><br>
+    <input class="btn btn-primary" id ="move" type="submit" value="move piece" onclick="move_piece()">
+    </div>
+</body>
+</html>
