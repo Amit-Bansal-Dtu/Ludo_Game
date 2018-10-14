@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
     let count_bl=0, count_re=0, count_ye=0, count_gr=0;
     let array_b =[{x: 290,y: 55},{x: 290, y: 85},{x: 290, y: 115},{x: 290, y: 145},{x:290, y: 175},{x:325, y: 210},{x:355, y:210},{x:385, y:210},{x:415, y:210},{x:445, y: 210},{x:475, y:210},
@@ -662,6 +662,7 @@
     </style>
 </head>
 <body onload="draw()">
+    <div id="pl_on" style= "Text-align: center; border: solid green 3px; margin: 30px; height: 30px"></div>
     <div id="turn" style="Text-align: center; border: solid orange 3px">PLAYER BLUE TURN</div>
     <div class="left">
     <canvas style="margin-left: 410px" id="ludo" height ="500" width="500"></canvas>
@@ -670,7 +671,26 @@
     <input id="piece" type="number" placeholder="which piece"><br><br>
     <input id="dice" type="number" placeholder="face value">
     <input class="btn btn-danger" type="submit" value="Rotate Dice" onclick="gen_rand()"><br><br>
-    <input class="btn btn-primary" id ="move" type="submit" value="move piece" onclick="move_piece()">
+    <input class="btn btn-primary" id ="move" type="submit" value="move piece">
     </div>
+    <script>
+      $(function(){
+        let socket = io.connect();
+        let $pl_on = $("#pl_on");
+        let $move = $("#move");
+        let $piece = $("#piece");
+        let $dice = $("#dice");
+        $move.click(function(){
+            socket.emit("new throw", {piece: $piece.val(), dice: $dice.val()});
+            move_piece();
+        })
+        socket.on("this throw", function(data){
+            $pl_on.html("<div>piece: "+data.piece+ ", dice: " + data.dice + "</div>");
+            $piece.val(data.piece);
+            $dice.val(data.dice);
+            move_piece();
+        });
+      });
+    </script>
 </body>
 </html>
