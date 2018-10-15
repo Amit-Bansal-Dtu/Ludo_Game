@@ -5,12 +5,14 @@ let io = require("socket.io").listen(server);
 let count = 0;
 server.listen(process.env.PORT || "3243");
 
+let connections = [];
+
 console.log("Server Running...");
-console.log(count);
 app.get("/", (req, res)=>{res.sendFile(__dirname + "/Ludo.html")});
 
 io.sockets.on("connection",function(socket){
    count++;
+   connections.push(socket);
    console.log("No. of Players Online are: " + count);
    socket.on("disconnect", function(data){
        count--;
@@ -19,5 +21,5 @@ io.sockets.on("connection",function(socket){
    socket.on("new throw", function(data){
        console.log("it's working");
        socket.broadcast.emit("this throw", data);
-   })
+   });
 });
