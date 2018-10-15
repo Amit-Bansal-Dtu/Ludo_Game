@@ -364,9 +364,16 @@
         ctx.fillText("3",445, 458);
         ctx.stroke();
     }
+    function playaudio(){
+        let jumping = document.getElementById("jump");
+        jumping.play();
+        console.log("Hello");
+    }
     function move_piece(){
         let turn;
         let string = "";
+        console.log("I'm There!");
+        playaudio();
         if(document.getElementById("turn").innerText=="PLAYER BLUE TURN"){
             turn = 0;
         }
@@ -670,7 +677,8 @@
     <div class="right">
     <input id="piece" type="number" placeholder="which piece"><br><br>
     <input id="dice" type="number" placeholder="face value">
-    <input class="btn btn-danger" type="submit" value="Rotate Dice" onclick="gen_rand()"><br><br>
+    <input id="throw" class="btn btn-danger" type="submit" value="Rotate Dice" onclick="gen_rand()"><br><br>
+    <audio id="jump"><source src = "Mario-jump-sound.mp3"></audio>
     <input class="btn btn-primary" id ="move" type="submit" value="move piece">
     </div>
     <script>
@@ -680,10 +688,15 @@
         let $move = $("#move");
         let $piece = $("#piece");
         let $dice = $("#dice");
+        let $throw = $("#throw");
+        $throw.click(function(){
+            $throw.prop("disabled", true);
+        });
         $move.click(function(){
             socket.emit("new throw", {piece: $piece.val(), dice: $dice.val()});
+            $throw.prop("disabled", false);
             move_piece();
-        })
+        });
         socket.on("this throw", function(data){
             $pl_on.html("<div>piece: "+data.piece+ ", dice: " + data.dice + "</div>");
             $piece.val(data.piece);
